@@ -1,12 +1,8 @@
 import React from 'react'
 import { createContext, useContext, useState } from 'react'
 
-const updateGender = (gender) => {
-
-}
-
 const defaultState = {
-    gender: "M",
+    gender:null,
     questionnaire: []
 }
 const SurveyContext = createContext(defaultState)
