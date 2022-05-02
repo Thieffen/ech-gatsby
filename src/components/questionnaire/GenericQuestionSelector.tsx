@@ -10,21 +10,21 @@ type Props = {
 };
 
 const options = [
-    { id: "1", title: "Not like me at all" },
-    { id: "2", title: "Not like me" },
-    { id: "3", title: "A little like me" },
-    { id: "4", title: "Somewhat like me" },
-    { id: "5", title: "Like me" },
-    { id: "6", title: "Very much like me" },
+    {id: "1", title: "Not like me at all"},
+    {id: "2", title: "Not like me"},
+    {id: "3", title: "A little like me"},
+    {id: "4", title: "Somewhat like me"},
+    {id: "5", title: "Like me"},
+    {id: "6", title: "Very much like me"},
     // { id: "N", title: "I prefer not to answer" },
 ];
 
-export default function GenericQuestionSelector({ id, title, index }: Props) {
-    const { data, questionnaireHandler } = useSurveyContext()
+export default function GenericQuestionSelector({id, title, index}: Props) {
+    const {data, questionnaireHandler} = useSurveyContext()
     const questionnaire = data.questionnaire
 
     const update = (questionId: string, answer: string) => {
-        // questionnaireHandler(questionId, parseInt(answer.slice(-1)));
+        questionnaireHandler(questionId, parseInt(answer.slice(-1)));
     };
 
     return (

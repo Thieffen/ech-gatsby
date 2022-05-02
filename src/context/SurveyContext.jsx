@@ -18,18 +18,20 @@ export const SurveyContextProvider = ({ children }) => {
 
   const updateGender = (gender) => {
     const newState = {...data, gender};
-    console.log("new state", newState)
     updateState(newState)
   }
 
-  const updateQuestionnaire = () => {
-    console.log("update questionnaire!")
-  }
+  const questionnaireHandler = (questionId, answer) => {
+    const questionnaire = {...data.questionnaire, [questionId]: answer}
+    const newState = {...data, questionnaire};
+    console.log(newState)
+    updateState(newState)
+  };
 
   const contextValues = {
     data,
     updateGender,
-    updateQuestionnaire
+    questionnaireHandler
   }
 
   return <SurveyContext.Provider value={contextValues}>{children}</SurveyContext.Provider>
