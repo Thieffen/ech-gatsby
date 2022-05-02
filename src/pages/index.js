@@ -1,122 +1,69 @@
 import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import { navigate } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
+import {useSurveyContext} from "../context/SurveyContext";
+import Steps from "../components/layout/Steps";
+import ButtonPrimary from "../components/layout/ButtonPrimary";
 
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-  },
-  {
-    text: "Examples",
-    url: "https://github.com/gatsbyjs/gatsby/tree/master/examples",
-    description:
-      "A collection of websites ranging from very basic to complex/complete that illustrate how to accomplish specific tasks within your Gatsby sites.",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Learn how to add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
-  },
-]
+const IndexPage = () => {
+  // get the data
+  const {data} = useSurveyContext()
+  console.log(data)
 
-const samplePageLinks = [
-  {
-    text: "Page 2",
-    url: "page-2",
-    badge: false,
-    description:
-      "A simple example of linking to another page within a Gatsby site",
-  },
-  { text: "TypeScript", url: "using-typescript" },
-  { text: "Server Side Rendering", url: "using-ssr" },
-  { text: "Deferred Static Generation", url: "using-dsg" },
-]
-
-const moreLinks = [
-  { text: "Join us on Discord", url: "https://gatsby.dev/discord" },
-  {
-    text: "Documentation",
-    url: "https://gatsbyjs.com/docs/?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter",
-  },
-  {
-    text: "Starters",
-    url: "https://gatsbyjs.com/starters/?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter",
-  },
-  {
-    text: "Showcase",
-    url: "https://gatsbyjs.com/showcase/?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter",
-  },
-  {
-    text: "Contributing",
-    url: "https://www.gatsbyjs.com/contributing/?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
-]
-
-const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
-
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <div className={styles.textCenter}>
-      <StaticImage
-        src="../images/example.png"
-        loading="eager"
-        width={64}
-        quality={95}
-        formats={["auto", "webp", "avif"]}
-        alt=""
-        style={{ marginBottom: `var(--space-3)` }}
-      />
-      <h1>
-        Welcome to <b>Gatsby!</b>
-      </h1>
-      <p className={styles.intro}>
-        <b>Example pages:</b>{" "}
-        {samplePageLinks.map((link, i) => (
-          <React.Fragment key={link.url}>
-            <Link to={link.url}>{link.text}</Link>
-            {i !== samplePageLinks.length - 1 && <> · </>}
-          </React.Fragment>
-        ))}
-        <br />
-        Edit <code>src/pages/index.js</code> to update this page.
-      </p>
-    </div>
-    <ul className={styles.list}>
-      {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
-          <a
-            className={styles.listItemLink}
-            href={`${link.url}${utmParameters}`}
-          >
-            {link.text} ↗
-          </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
-        </li>
-      ))}
-    </ul>
-    {moreLinks.map((link, i) => (
-      <React.Fragment key={link.url}>
-        <a href={`${link.url}${utmParameters}`}>{link.text}</a>
-        {i !== moreLinks.length - 1 && <> · </>}
-      </React.Fragment>
-    ))}
-  </Layout>
-)
+  return (
+    <Layout>
+      <Seo title="Home"/>
+      <div >
+        <Steps
+          className="mb-6"
+          step1="current"
+          step2="upcoming"
+          step3="upcoming"
+        />
+        <section className="prose mb-3">
+          <h2>Welcome to the Personal Values Self-Assessment</h2>
+          <p className="font-bold">
+            The Personal Values Questionnaire is based on the theory of personal
+            values developed by the social psychologist Shalom Schwartz and
+            colleagues and which has been empirically tested in more than 80
+            countries.
+          </p>
+          <p>
+            At the end of the questionnaire you will receive an automatically
+            generated personal values assessment. This can help you understand:
+            which personal values are most important to you, and how your values
+            differ from an average EU citizen.
+          </p>
+          <p>
+            This self-assessment tool is part of an initiative by the European
+            Commission's Joint Research Centre to help policymakers in the
+            European Institutions and EU Member States deliver better policies by
+            knowing their own values priorities and potential blind spots.
+          </p>
+          <p>
+            No policymaker? You can of course take the self-test just the same.
+          </p>
+          <p className="border-t pt-2 text-sm text-gray-500">
+            <span className="font-semibold">Confidentiality:</span>
+            <br/> This questionnaire includes questions that could be considered
+            sensitive. Your participation is completely voluntary. All of your
+            answers are confidential and all computations are made by your
+            computer. No data will be sent.. If you agree to these terms, please
+            click on "Start questionnaire".
+          </p>
+        </section>
+        <div className="flex space-x-2 border-t pt-5">
+          <ButtonPrimary
+            label="Start questionnaire"
+            onClick={() => navigate("/questionnaire")}
+            className=""/>
+        </div>
+        {/*<Debug questionnaire={questionnaire} gender={gender} />*/}
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage
