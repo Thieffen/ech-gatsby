@@ -3,14 +3,11 @@ import { navigate } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import {useSurveyContext} from "../context/SurveyContext";
 import Steps from "../components/layout/Steps";
 import ButtonPrimary from "../components/layout/ButtonPrimary";
 
 const IndexPage = () => {
-  // get the data
-  const {data} = useSurveyContext()
-  console.log(data)
+
 
   return (
     <Layout>

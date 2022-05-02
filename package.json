@@ -5,7 +5,9 @@
   "version": "0.1.0",
   "author": "Thieffen Delabaere <thieffen.delabaere@gmail.com>",
   "dependencies": {
+    "@headlessui/react": "^1.6.0",
     "autoprefixer": "^10.4.5",
+    "classnames": "^2.3.1",
     "gatsby": "^4.13.0",
     "gatsby-plugin-postcss": "^5.13.0",
     "gatsby-plugin-react-helmet": "^5.13.0",

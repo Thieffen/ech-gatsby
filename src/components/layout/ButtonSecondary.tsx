@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-    className: string;
+    className?: string;
     label: string;
     onClick: Function;
 };

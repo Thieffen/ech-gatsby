@@ -1,0 +1,52 @@
+import { RadioGroup } from "@headlessui/react";
+// @ts-ignore
+import {useSurveyContext} from "../../context/SurveyContext";
+import React from "react";
+
+const memoryOptions = [
+    { name: "she / her / her", value: "F" },
+    { name: "he / him / his", value: "M" },
+    { name: "they / them / their", value: "NB" },
+];
+
+function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(" ");
+}
+
+export default function GenderSelector() {
+    const { gender, updateGender } = useSurveyContext();
+
+    const update = (value) => {
+       updateGender(value);
+    };
+
+    return (
+        <div className="mb-6">
+            <RadioGroup value={gender} onChange={update} className="mt-6">
+                <RadioGroup.Label className="sr-only">
+                    Choose the pronouns you prefer
+                </RadioGroup.Label>
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                    {memoryOptions.map((option) => (
+                        <RadioGroup.Option
+                            key={option.value}
+                            value={option.value}
+                            className={({ active, checked }) =>
+                                classNames(
+                                    "cursor-pointer focus:outline-none",
+                                    active ? "ring-2 ring-indigo-500 ring-offset-2" : "",
+                                    checked
+                                        ? "border-transparent bg-indigo-600 text-white hover:bg-indigo-700"
+                                        : "border-gray-200 bg-white text-gray-900 hover:bg-gray-50",
+                                    "flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1"
+                                )
+                            }
+                        >
+                            <RadioGroup.Label as="p">{option.name}</RadioGroup.Label>
+                        </RadioGroup.Option>
+                    ))}
+                </div>
+            </RadioGroup>
+        </div>
+    );
+}
